@@ -76,6 +76,7 @@ This ensures a seamless shopping experience without losing user data.
 ---
 
 ## 📂 Project Structure
+
 ```
 shop_client
 ├── apis
