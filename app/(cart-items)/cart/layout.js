@@ -1,0 +1,11 @@
+export const metadata = {
+  title: "Cart"
+}
+
+export default function CartLayout({ children }) {
+  return (
+    <>
+      {children}
+    </>
+  )
+}
