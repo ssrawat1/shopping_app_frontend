@@ -1,4 +1,4 @@
-# 🛒 Next.js Shopping App
+# 🛒 Next.js Shopping App - Client Side
 
 A modern, secure, and user-friendly shopping application built with **Next.js**.  
 This project focuses on seamless user experience, session-based authentication, smart cart management, and performance optimization.
@@ -75,33 +75,69 @@ This ensures a seamless shopping experience without losing user data.
 ```
 shop_client
 ├── apis
-│ ├── axiosInstance.js
-│ ├── cartApi.js
-│ ├── otpApi.js
-│ └── productsApi.js
+│ ├── axiosInstance.js  
+│ ├── cartApi.js  
+│ ├── otpApi.js  
+│ └── productsApi.js  
+│ └── userApi.js  
 ├── app
 │ ├── (auth)
-│ │ ├── login
-│ │ └── register
+│ │ ├── login  
+│ │ └── register  
 │ ├── (cart-items)/cart
-│ ├── (product-detail)/products/[id]
-│ ├── layout.js
-│ ├── page.js
-│ └── globals.css
+│ ├── (product-detail)/products/[id]  
+│ ├── layout.js  
+│ ├── page.js  
+│ └── globals.css  
 ├── components
-│ ├── Header.jsx
-│ ├── Pagination.jsx
-│ └── Error.jsx
+│ ├── Header.jsx  
+│ ├── Pagination.jsx  
+│ └── Error.jsx  
 ├── context
-│ ├── CartContext.jsx
-│ ├── ProductContext.jsx
-│ └── ThemeContext.jsx
+│ ├── CartContext.jsx  
+│ ├── ProductContext.jsx  
+│ └── ThemeContext.jsx  
 ├── modal
-│ └── ProfileModal.jsx
+│ └── ProfileModal.jsx  
 ├── pages
-│ ├── Product.jsx
-│ └── ProductDetails.jsx
+│ ├── Product.jsx  
+│ └── ProductDetails.jsx  
 ├── public
-└── utils
-  └── filters/items.js
+├── utils
+│ └── filters/items.js  
+└── .env  
 ```
+
+---
+
+## 🧠 **Authentication & Cart Logic**
+
+### Guest Flow:
+1. Guest user visits the website.
+2. Items are added to the guest session cart.
+3. Cart data is stored temporarily in the session.
+
+### Login Flow:
+1. User logs in.
+2. Guest cart items are merged into the user's database cart.
+3. Any duplicate products are handled by updating the quantities.
+
+### Logout Flow:
+1. User logs out.
+2. The current cart data is stored in the guest session.
+3. Cart data is restored on the next login.
+
+This ensures that the shopping experience remains seamless, even if the user switches between guest and authenticated sessions.
+
+---
+
+### **Project Breakdown**
+
+- **Controllers:** Manage application logic (e.g., auth, cart, products, and users).
+- **Models:** Define the MongoDB schema for various resources like products, users, and carts.
+- **Routes:** Define the API endpoints for each feature (auth, cart, products, etc.).
+- **Middleware:** Handle various pre-route checks (e.g., ID validation).
+- **Services:** Contains utility functions for tasks like sending OTPs.
+- **Utils:** Common utilities for performance optimization (rate limiting and throttling).
+
+The backend architecture ensures a modular, maintainable, and scalable solution for handling user data, product management, and cart functionality.
