@@ -90,7 +90,7 @@ const Login = () => {
 
   return (
     <div
-      className="flex mt-16 md:mt-16 sm:mt-24 items-center justify-center px-4 sm:px-6"
+      className="flex mt-4 md:mt-12 sm:mt-24 items-center justify-center px-4 sm:px-6"
       style={{ minHeight: 'calc(100vh - 64px)' }}
     >
       <form

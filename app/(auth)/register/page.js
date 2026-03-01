@@ -248,7 +248,7 @@ const Register = () => {
 
   return (
     <div
-      className="flex mt-28 sm:mt-40 md:mt-28 items-center justify-center px-4 sm:px-6"
+      className="flex mt-16 sm:mt-28 md:mt-20 items-center justify-center px-4 sm:px-6"
       style={{ minHeight: 'calc(100vh - 64px)' }}
     >
       {!showOtpVerification ?
@@ -273,7 +273,7 @@ const Register = () => {
           </div>
 
           {/* Form Fields */}
-          <div className="space-y-4 sm:space-y-5">
+          <div className="space-y-4 sm:space-y-2">
             {/* Full Name */}
             <div className="space-y-1.5 sm:space-y-2">
               <label htmlFor="name" className="block text-xs sm:text-sm font-medium text-inherit">
