@@ -1,41 +1,46 @@
 # 🛒 Next.js Shopping App - Client Side
 
 A modern, secure, and user-friendly shopping application built with **Next.js**.  
-This project focuses on seamless user experience, session-based authentication, smart cart management, and performance optimization.
+This project focuses on seamless user experience, session-based authentication, smart cart management, search functionality, and performance optimization.
 
 ---
 
 ## 🚀 Features
 
-### 🔐 Session-Based Authentication
+### 🔐 **Session-Based Authentication**
 - Secure session-based authentication system
 - Guest users can browse and add items to cart
 - On login, guest cart items are automatically merged with the user’s account cart
 - On logout, cart items are preserved in guest session
 - Smooth cart restoration on re-login
 
-### 🛍 Smart Cart System
+### 🛍 **Smart Cart System**
 - Guest cart (session-based)
 - Authenticated user cart (database-based)
 - Automatic cart merging logic
 - Add, remove, and update product quantities
 - Persistent cart experience similar to major e-commerce platforms
 
-### 📦 Product Management
+### 📦 **Product Management**
 - Product listing page
 - Product detail page
 - Cart page with full summary
 - Clean and responsive UI
 
-### 📑 Pagination
+### 📑 **Pagination**
 - Implemented pagination for product listing
 - Improves performance
 - Enhances user experience
 - Reduces excessive scrolling
 
-### 🎨 Theme Support
+### 🎨 **Theme Support**
 - Light/Dark mode support
 - Improved accessibility and modern UI feel
+
+### 🔍 **Search Functionality**
+- Auto-suggests products as the user types in the search bar
+- Displays suggestions based on the user's query and matches available products
+- Provides a responsive and intuitive search experience
 
 ---
 
@@ -49,7 +54,7 @@ This project focuses on seamless user experience, session-based authentication, 
 
 ---
 
-## 🧠 Authentication & Cart Logic
+## 🧠 **Authentication & Cart Logic**
 
 ### Guest Flow:
 1. User visits website
@@ -71,43 +76,43 @@ This ensures a seamless shopping experience without losing user data.
 ---
 
 ## 📂 Project Structure
-
 ```
 shop_client
 ├── apis
-│ ├── axiosInstance.js  
-│ ├── cartApi.js  
-│ ├── otpApi.js  
-│ └── productsApi.js  
-│ └── userApi.js  
+│ ├── axiosInstance.js
+│ ├── cartApi.js
+│ ├── otpApi.js
+│ ├── productsApi.js
+│ └── userApi.js
 ├── app
 │ ├── (auth)
-│ │ ├── login  
-│ │ └── register  
+│ │ ├── login
+│ │ └── register
 │ ├── (cart-items)/cart
-│ ├── (product-detail)/products/[id]  
-│ ├── layout.js  
-│ ├── page.js  
-│ └── globals.css  
+│ ├── (product-detail)/products/[id]
+│ ├── layout.js
+│ ├── page.js
+│ └── globals.css
 ├── components
-│ ├── Header.jsx  
-│ ├── Pagination.jsx  
-│ └── Error.jsx  
+│ ├── Header.jsx
+│ ├── Pagination.jsx
+│ ├── Error.jsx
+│ └── SearchBar.jsx # Search bar component for search functionality
 ├── context
-│ ├── CartContext.jsx  
-│ ├── ProductContext.jsx  
-│ └── ThemeContext.jsx  
+│ ├── CartContext.jsx
+│ ├── ProductContext.jsx
+│ └── ThemeContext.jsx
 ├── modal
-│ └── ProfileModal.jsx  
+│ └── ProfileModal.jsx
 ├── pages
-│ ├── Product.jsx  
-│ └── ProductDetails.jsx  
+│ ├── Product.jsx
+│ └── ProductDetails.jsx
 ├── public
 ├── utils
-│ └── filters/items.js  
-└── .env  
-```
+│ └── filters/items.js
+└── .env
 
+```
 ---
 
 ## 🧠 **Authentication & Cart Logic**
@@ -131,13 +136,19 @@ This ensures that the shopping experience remains seamless, even if the user swi
 
 ---
 
-### **Project Breakdown**
 
-- **Controllers:** Manage application logic (e.g., auth, cart, products, and users).
-- **Models:** Define the MongoDB schema for various resources like products, users, and carts.
-- **Routes:** Define the API endpoints for each feature (auth, cart, products, etc.).
-- **Middleware:** Handle various pre-route checks (e.g., ID validation).
-- **Services:** Contains utility functions for tasks like sending OTPs.
-- **Utils:** Common utilities for performance optimization (rate limiting and throttling).
+### Explanation of Project Structure:
+- **`apis/`**: Contains all the API service files for interacting with the backend (cart, product, user, OTP, etc.).
+- **`app/`**: Houses main components related to different routes of the app. For example:
+  - **`auth/`**: Handles login and registration pages.
+  - **`cart-items/`**: Displays the cart summary page.
+  - **`product-detail/`**: Handles product detail pages.
+  - **`layout.js`**: Contains the layout of common elements like the header and footer.
+- **`components/`**: Contains UI components that can be reused across the app, including search functionality, pagination, and error handling.
+- **`context/`**: Houses context files for managing global state (cart, products, theme).
+- **`modal/`**: Houses modals (like profile settings).
+- **`pages/`**: Contains the pages rendered by Next.js, like product listing and details.
+- **`public/`**: Static assets like images, icons, etc.
+- **`utils/`**: Utility functions, such as item filters.
 
-The backend architecture ensures a modular, maintainable, and scalable solution for handling user data, product management, and cart functionality.
+This structure is now more reflective of how Next.js apps are typically organized, with better alignment of components and routing logic. Let me know if you need any more adjustments!
