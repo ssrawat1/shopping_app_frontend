@@ -112,7 +112,9 @@ const Header = () => {
   }, [setCartItems, isLoggedIn])
 
   const handleSearchQuery = (e) => {
-    setSearchQuery(DOMPurify.sanitize(e.target.value, { ALLOWED_TAGS: [], ALLOWED_ATTR: [] }))
+    const sanitizeData = DOMPurify.sanitize(e.target.value, { ALLOWED_TAGS: [], ALLOWED_ATTR: [] });
+    console.log({ sanitizeData })
+    setSearchQuery(sanitizeData)
     setShowSuggestionBox(true)
   }
 
