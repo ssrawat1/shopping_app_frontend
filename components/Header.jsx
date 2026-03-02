@@ -336,7 +336,7 @@ const Header = () => {
         }`}>
         <input
           className={`outline-none bg-transparent flex-1 text-sm ${isDark ? "text-gray-100 placeholder-gray-500" : "text-gray-800 placeholder-gray-400"}`}
-          placeholder='Search products...'
+          placeholder='Search products items...'
           type="text"
           value={searchQuery}
           onChange={handleSearchQuery}
