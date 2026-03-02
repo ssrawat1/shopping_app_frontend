@@ -72,7 +72,6 @@ const Header = () => {
     (async () => {
       try {
         const { data } = await profileApi()
-        console.log("profile data:", data)
         setIsLoggedIn(true);
         setProfileData(data)
       } catch (error) {
@@ -86,7 +85,6 @@ const Header = () => {
 
   useEffect(() => {
     const handleClickOutside = (e) => {
-      console.log(e.target)
       if (profileRef.current && !profileRef.current.contains(e.target)) {
         setShowUserProfile(false);
       }
@@ -106,7 +104,6 @@ const Header = () => {
     (async () => {
       try {
         const { data } = await fetchCartItemsApi();
-        console.log("Cart Data:", data)
         setCartItems(data.cartItems)
       } catch (error) {
         console.log("Error while fetching cart items:", error.message)
@@ -121,8 +118,6 @@ const Header = () => {
 
   /* Total item Quantity: */
   const totalQuantity = cartItems?.reduce((prev, curr) => prev + curr.quantity, 0)
-
-  console.log({ isLoggedIn })
 
   return (
     <header className={`py-5 ${isDark ? "bg-gray-900/90" : "bg-gray-50/90"} px-3 sm:px-6 md:px-10 lg:px-20 fixed w-full top-0 left-0 flex flex-wrap justify-between items-center z-50 shadow ${isDark ? "shadow-gray-800" : "border-gray-100 shadow-gray-200"}`}>
