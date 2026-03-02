@@ -271,6 +271,7 @@ const Register = () => {
                 name="name"
                 required
                 id="name"
+                autoComplete='off'
                 placeholder="Enter your full name"
                 className="w-full px-3 sm:px-4 py-2 sm:py-3 text-sm sm:text-base rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all duration-200 placeholder:text-gray-400"
               />
@@ -290,6 +291,7 @@ const Register = () => {
                 type="email"
                 name="email"
                 id="email"
+                autoComplete='off'
                 required
                 placeholder="Enter your email"
                 className="w-full px-3 sm:px-4 py-2 sm:py-3 text-sm sm:text-base rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all duration-200 placeholder:text-gray-400"
@@ -310,6 +312,7 @@ const Register = () => {
                 type="password"
                 name="password"
                 id="password"
+                autoComplete='off'
                 required
                 placeholder="Create a strong password"
                 className="w-full px-3 sm:px-4 py-2 sm:py-3 text-sm sm:text-base rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all duration-200 placeholder:text-gray-400"
@@ -426,6 +429,7 @@ const Register = () => {
                     onPaste={index === 0 ? handlePaste : undefined}
                     type="number"
                     required
+                    autoComplete='off'
                     onFocus={(e) => handleFocus(e, index)}
                     onBlur={handleBlur}
                     onInput={(e) => {
