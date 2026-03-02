@@ -14,7 +14,8 @@
 /coverage
 
 # next.js
- /out/
+/.next/
+/out/
 
 # production
 /build

@@ -7,6 +7,7 @@ import { registerApi } from '@/apis/userApi.js'
 import { sendOtpApi, verifyOtpApi } from '@/apis/otpApi.js'
 import { ArrowLeft, CheckCircle } from 'lucide-react'
 import { useRouter } from 'next/navigation'
+import DOMPurify from "dompurify"
 
 const Register = () => {
   /* Register State */
@@ -40,7 +41,7 @@ const Register = () => {
   /* Handle onChange */
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setUserData((prev) => ({ ...prev, [name]: value }));
+    setUserData((prev) => ({ ...prev, [name]: DOMPurify.sanitize(value, { ALLOWED_TAGS: [], ALLOWED_ATTR: [] }) }));
     const inputFiledErrors = registerValidator({ [name]: value.trim() }, setErrors)
     setErrors(inputFiledErrors);
     if (!Object.keys(inputFiledErrors).length && Object.values(userData).every(val => val)) {
@@ -72,9 +73,8 @@ const Register = () => {
     e.preventDefault();
     try {
       setIsSendingOtp(true)
-      const { data } = await sendOtpApi({ email: userData.email });
+      const { data } = await sendOtpApi({ email: DOMPurify.sanitize(userData.email, { ALLOWED_TAGS: [], ALLOWED_ATTR: [] }) });
       if (!data.success && data.error) { }
-      console.log(data)
       setShowOtpVerification(true)
       setIsSendingOtp(false)
       setIsAllowToSubmit(false)
@@ -91,13 +91,11 @@ const Register = () => {
 
   /* Handle Change Otp: */
   const handleChangeOtp = (index, value) => {
-    console.log("on change..", { index, value })
     setOtp((prev) => {
-      prev[Number(index)] = value;
+      prev[Number(index)] = DOMPurify.sanitize(value, { ALLOWED_TAGS: [], ALLOWED_ATTR: [] });
       return [...prev]
     });
     otp[index] = value;
-    console.log(otp)
     const otpValidationErrors = otpValidator({ otp }, setErrors);
     if (Object.keys(otpValidationErrors).length) {
       setIsAllowToSubmit(false)
@@ -113,8 +111,6 @@ const Register = () => {
 
   /* Handle key down (To prevent from negative number ): */
   const handleKeyDown = (index, e) => {
-    console.log({ keyName: e.key, element: otp[index], index });
-
     // Handle right arrow
     if (e.key === "ArrowRight" && index < 5) {
       document?.querySelector(`#otp-${index + 1}`).focus()
@@ -122,11 +118,9 @@ const Register = () => {
       document?.querySelector(`#otp-${index - 1}`).focus()
     } else if (e.key === "Backspace") {// Handle backspace
       if (!otp[index] && index > 0) {
-        console.log("...")
         document?.querySelector(`#otp-${index - 1}`).focus()
       } else {
         // clearing current filed
-        console.log("clear...")
         otp[index] = "";
         setOtp((prev) => ([...prev]))
         const otpValidationErrors = otpValidator({ otp }, setErrors);
@@ -143,11 +137,9 @@ const Register = () => {
   const handlePaste = (e) => {
     e.preventDefault();
     const copiedData = e.clipboardData.getData("text").replaceAll(/\D/g, "").slice(0, 6);
-    console.log({ copiedData })
     if (copiedData && copiedData.length) {
       const copiedOtpArray = copiedData.split("");
       const requiredOtpArray = [...copiedOtpArray, ...Array.from({ length: 6 - copiedOtpArray.length }).fill("")]
-      console.log({ requiredOtpArray })
       setOtp(requiredOtpArray);
       document?.querySelector(`#otp-${Math.min(requiredOtpArray.length, 5)}`).focus()
       const otpValidationErrors = otpValidator({ otp: requiredOtpArray }, setErrors);
@@ -169,14 +161,11 @@ const Register = () => {
         :
         val.trim()
     });
-    console.log(cleanUserInput)
     if (Object.keys(registerValidator(cleanUserInput, setErrors)).length) return;
 
     try {
       setIsSubmitting(true)
       const { data } = await registerApi(userData);
-      console.log("data:", data)
-      console.log(data)
       setIsSubmitting(false)
       setIsSubmitSucceed(true)
       setTimeout(() => {
@@ -185,7 +174,6 @@ const Register = () => {
       setErrors({})
       setUserData({ name: "", email: "", password: "" });
     } catch (error) {
-      console.log("error while making register request:", error)
       if (error.status === 409) {
         setCreateAccountError(error.response.data)
         setIsSubmitting(false)
@@ -199,15 +187,12 @@ const Register = () => {
   const handleVerifyOtp = async (e) => {
     e.preventDefault();
     const otpValidationError = otpValidator({ otp }, setErrors);
-    console.log("otpValidationError:", otpValidationError)
     try {
       setIsOtpVerifying(true)
       const { data } = await verifyOtpApi({ userOtp: otp.join(""), email: userData.email })
       if (!data.success && data.error) {
-        console.log("error while verifying otp:", data)
         // setErrors(data.errors)
       }
-      console.log("otp verified status:", data)
       setIsOtpVerifying(false)
       setIsOtpVerified(true);
       setOtp(["", "", "", "", "", ""])
@@ -218,7 +203,6 @@ const Register = () => {
         setIsOtpVerified(false);
       }, 2000)
     } catch (error) {
-      console.log("Error while verifying the otp:", error.message);
       if (error.status === 400 && !error.response.data.success && error.response.data.error) {
         setErrors({ otp: error.response.data.error })
       }
@@ -235,7 +219,6 @@ const Register = () => {
       setIsResendOtp(true)
       const { data } = await sendOtpApi({ email: userData.email });
       if (!data.success && data.error) { }
-      console.log("re-send otp response:", data)
       setIsResendOtp(false);
       setIsResendSucceed(true);
       setTimeout(() => {

@@ -10,6 +10,7 @@ import { useCartContext } from '@/context/CartContext'
 import { fetchCartItemsApi } from '@/apis/cartApi'
 import { useProductContext } from '@/context/ProductContext'
 import { useRouter } from 'next/navigation'
+import DOMPurify from "dompurify"
 
 const Header = () => {
   const [profileData, setProfileData] = useState(null);
@@ -114,7 +115,7 @@ const Header = () => {
   }, [setCartItems, isLoggedIn])
 
   const handleSearchQuery = (e) => {
-    setSearchQuery(e.target.value)
+    setSearchQuery(DOMPurify.sanitize(e.target.value, { ALLOWED_TAGS: [], ALLOWED_ATTR: [] }))
     setShowSuggestionBox(true)
   }
 

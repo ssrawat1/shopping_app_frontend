@@ -19,9 +19,7 @@ const Cart = () => {
   const handleRemoveAllItems = async () => {
     try {
       const { data } = await removeAllItemsApi();
-      console.log("Remove all cart items response:", data);
       const { data: cartData } = await fetchCartItemsApi();
-      console.log("Delete cart items response:", cartData)
       setCartItems(cartData.cartItems)
     } catch (error) {
       console.log("Error while removing all cart items:", error.message)

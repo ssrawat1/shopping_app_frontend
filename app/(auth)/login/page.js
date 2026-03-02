@@ -8,6 +8,7 @@ import { CheckCircle } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { fetchCartItemsApi } from '@/apis/cartApi'
 import { useCartContext } from '@/context/CartContext'
+import DOMPurify from "dompurify"
 
 const Login = () => {
   const [loginData, setLoginData] = useState({
@@ -30,7 +31,7 @@ const Login = () => {
   /* onChange Handler: */
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setLoginData((prev) => ({ ...prev, [name]: value }));
+    setLoginData((prev) => ({ ...prev, [name]: DOMPurify.sanitize(value, { ALLOWED_TAGS: [], ALLOWED_ATTR: [] }) }));
     const inputFiledErrors = loginValidator({ [name]: value }, setErrors);
     if (!Object.keys(inputFiledErrors).length && Object.values(loginData).every(val => val)) {
       setIsAllowToSubmit(true)
@@ -61,13 +62,11 @@ const Login = () => {
         :
         val.trim()
     });
-    console.log(cleanUserInput)
     if (Object.keys(loginValidator(cleanUserInput, setErrors)).length) return;
     try {
       setIsVerifying(true)
       const { data } = await loginApi(loginData);
       const { data: cartData } = await fetchCartItemsApi();
-      console.log("cart items:", cartData)
       if (cartData.success && cartData) {
         setCartItems(cartData.cartItems)
       }
@@ -77,10 +76,8 @@ const Login = () => {
       setIsLoggedIn(true)
       setLoginData({ email: "", password: "" });
       setTimeout(() => router.push("/"), 2000)
-      console.log("login Response:", data)
     } catch (error) {
       setIsVerifying(false)
-      console.log("Error while login:", error)
       if (error.status === 401 && !error.response.data.success && error.response.data.error) {
         setLoginError(error.response.data);
       }
