@@ -314,7 +314,7 @@ const Header = () => {
           <ShoppingCart onClick={() => {
             setSearchQuery("")
           }} size={20} className="sm:w-6 sm:h-6" />
-          <span className='absolute -top-2 right-2 w-5 h-5 bg-red-700 text-white rounded-full flex items-center justify-center text-xs font-bold shadow-lg'>
+          <span className='absolute -top-2.5 sm:right-2 right-1.5 w-5 h-5  bg-green-600 text-white rounded-full flex items-center justify-center text-xs font-semibold shadow-lg'>
             {totalQuantity || 0}
           </span>
         </Link>
