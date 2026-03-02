@@ -235,7 +235,7 @@ const Register = () => {
       style={{ minHeight: 'calc(100vh - 64px)' }}
     >
       {!showOtpVerification ?
-        <form onSubmit={handleSendOtp} className={`${isDark ? "bg-gray-800 text-gray-200" : "bg-white text-gray-700"} rounded-xl sm:rounded-2xl shadow-xl p-6 sm:p-8 space-y-4 sm:space-y-6 w-full max-w-sm sm:max-w-md`}>
+        <form onSubmit={handleSendOtp} autoComplete='off' className={`${isDark ? "bg-gray-800 text-gray-200" : "bg-white text-gray-700"} rounded-xl sm:rounded-2xl shadow-xl p-6 sm:p-8 space-y-4 sm:space-y-6 w-full max-w-sm sm:max-w-md`}>
           {/* Header */}
           <div className="text-center space-y-1 sm:space-y-2">
             <h1 className="text-2xl sm:text-3xl font-bold text-inherit">Create Account</h1>
@@ -351,7 +351,7 @@ const Register = () => {
             </div>
           </div>
         </form>
-        : <form onSubmit={showOtpCreateAccount ? handleSubmit : handleVerifyOtp} className={`${isDark ? "bg-gray-800 text-white" : "bg-white text-gray-900"} rounded-xl sm:rounded-2xl shadow-xl p-6 sm:p-8 space-y-4 sm:space-y-6 w-full max-w-sm sm:max-w-md`}>
+        : <form onSubmit={showOtpCreateAccount ? handleSubmit : handleVerifyOtp} autoComplete='off' className={`${isDark ? "bg-gray-800 text-white" : "bg-white text-gray-900"} rounded-xl sm:rounded-2xl shadow-xl p-6 sm:p-8 space-y-4 sm:space-y-6 w-full max-w-sm sm:max-w-md`}>
           {/* Header */}
           <div className="text-center space-y-1 sm:space-y-2">
             <h1 className="text-2xl sm:text-3xl font-bold">{isOtpVerified || showOtpCreateAccount ? "Create Account" : "OTP Verification"}</h1>

@@ -92,6 +92,7 @@ const Login = () => {
     >
       <form
         onSubmit={handleLoginSubmit}
+        autoComplete='off'
         className={`${isDark ? "bg-gray-800 text-gray-200" : "bg-white text-gray-700"} rounded-xl sm:rounded-2xl shadow-xl p-6 sm:p-8 space-y-4 sm:space-y-6 w-full max-w-sm sm:max-w-md`}
       >
         <div className="text-center space-y-1 sm:space-y-2">
@@ -113,6 +114,7 @@ const Login = () => {
               type="email"
               name="email"
               id="email"
+              required
               placeholder="Enter your email"
               className="w-full px-3 sm:px-4 py-2 sm:py-3 text-sm sm:text-base rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all duration-200 placeholder:text-gray-400"
             />
@@ -132,6 +134,7 @@ const Login = () => {
               type="password"
               name="password"
               id="password"
+              required
               placeholder="Enter your password"
               className="w-full px-3 sm:px-4 py-2 sm:py-3 text-sm sm:text-base rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all duration-200 placeholder:text-gray-400"
             />
