@@ -82,7 +82,7 @@ const Register = () => {
       setShowOtpCreateAccount(false)
     } catch (error) {
       console.log("error while sending otp request:", error.message);
-      if (error.status === 404 || !error.response.data.success) {
+      if (error.status === 404 || error.status === 429 || !error.response.data.success) {
         setSendOtpError(error.response.data)
         setIsSendingOtp(false);
       }
@@ -175,7 +175,7 @@ const Register = () => {
       setErrors({})
       setUserData({ name: "", email: "", password: "" });
     } catch (error) {
-      if (error.status === 409) {
+      if (error.status === 409 || 429) {
         setCreateAccountError(error.response.data)
         setIsSubmitting(false)
         setIsSubmitSucceed(false)
@@ -226,7 +226,14 @@ const Register = () => {
         setIsResendSucceed(false)
       }, 2000)
     } catch (error) {
-      console.log("Error while re-rending otp:", error.message)
+      console.log("error while sending otp request:", error);
+      if (error.status === 400 || 429 && !error.response.data.success && error.response.data.error) {
+        setErrors({ otp: error.response.data.error })
+      }
+      setTimeout(() => {
+        setIsResendOtp(false)
+        setErrors({})
+      }, 2000)
     }
   }
 

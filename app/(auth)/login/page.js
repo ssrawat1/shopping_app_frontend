@@ -77,8 +77,9 @@ const Login = () => {
       setLoginData({ email: "", password: "" });
       setTimeout(() => router.push("/"), 2000)
     } catch (error) {
+
       setIsVerifying(false)
-      if (error.status === 401 && !error.response.data.success && error.response.data.error) {
+      if ((error.status === 401 || 429) && !error.response.data.success && error.response.data.error) {
         setLoginError(error.response.data);
       }
       setTimeout(() => setLoginError(null), 2000)
