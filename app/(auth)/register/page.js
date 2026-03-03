@@ -73,7 +73,8 @@ const Register = () => {
     e.preventDefault();
     try {
       setIsSendingOtp(true)
-      const { data } = await sendOtpApi({ email: DOMPurify.sanitize(userData.email, { ALLOWED_TAGS: [], ALLOWED_ATTR: [] }) });
+      const sanitizedData = DOMPurify.sanitize(userData.email, { ALLOWED_TAGS: [], ALLOWED_ATTR: [] })
+      const { data } = await sendOtpApi({ email: sanitizedData });
       if (!data.success && data.error) { }
       setShowOtpVerification(true)
       setIsSendingOtp(false)
