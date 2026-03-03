@@ -7,31 +7,62 @@ export const Toast = () => {
   const { isDark } = useThemeContext();
 
   return (
-    <Toaster
-      position="top-right"
-      toastOptions={{
-        duration: 3000,
-        style: {
-          background: isDark ? '#1f2937' : '#fff',
-          color: isDark ? '#fff' : '#000',
-          border: isDark ? '1px solid #374151' : '1px solid #e5e7eb',
-          padding: '16px',
-          borderRadius: '8px',
-        },
-        success: {
-          iconTheme: {
-            primary: isDark ? '#14b8a6' : '#10b981',
-            secondary: '#fff',
+    <>
+      <style jsx global>{`
+        @keyframes slideInFromRight {
+          from {
+            transform: translateX(100%);
+            opacity: 0;
+          }
+          to {
+            transform: translateX(0);
+            opacity: 1;
+          }
+        }
+        
+        @keyframes slideOutToRight {
+          from {
+            transform: translateX(0);
+            opacity: 1;
+          }
+          to {
+            transform: translateX(100%);
+            opacity: 0;
+          }
+        }
+      `}</style>
+      
+      <Toaster
+        position="top-right"
+        containerStyle={{
+          top: 80,
+          right: 20,
+        }}
+        toastOptions={{
+          duration: 1000,
+          style: {
+            background: isDark ? '#1f2937' : '#fff',
+            color: isDark ? '#fff' : '#000',
+            border: isDark ? '1px solid #374151' : '1px solid #e5e7eb',
+            padding: '16px',
+            borderRadius: '8px',
+            animation: 'slideInFromRight 0.3s ease-out forwards',
           },
-        },
-        error: {
-          iconTheme: {
-            primary: isDark ? '#ef4444' : '#dc2626',
-            secondary: '#fff',
+          success: {
+            iconTheme: {
+              primary: isDark ? '#14b8a6' : '#10b981',
+              secondary: '#fff',
+            },
           },
-        },
-      }}
-    />
+          error: {
+            iconTheme: {
+              primary: isDark ? '#ef4444' : '#dc2626',
+              secondary: '#fff',
+            },
+          },
+        }}
+      />
+    </>
   );
 };
 
