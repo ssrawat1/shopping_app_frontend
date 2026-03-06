@@ -81,7 +81,7 @@ const Register = () => {
       setIsAllowToSubmit(false)
       setShowOtpCreateAccount(false)
     } catch (error) {
-      console.log("error while sending otp request:", error.message);
+      console.log("error while sending otp request:", error);
       if (error.status === 404 || error.status === 429 || !error.response.data.success) {
         setSendOtpError(error.response.data)
         setIsSendingOtp(false);
